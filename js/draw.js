@@ -11,7 +11,7 @@ const draw = () => {
 
   for (let i = 0; i < atoms.length; i++) {
     for (let j = i + 1; j < atoms.length; j++) {
-      //if (atoms[i].id === atoms[j].id) continue;
+      if (atoms[i].id && atoms[i].id === atoms[j].id) continue;
 
       const force = get_attraction(
         atoms[i].body.position,

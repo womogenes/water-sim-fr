@@ -25,31 +25,47 @@ window.setup = () => {
     Bodies.rectangle(width / 2, -10, width, 20, { isStatic: true }), // top
   ]);
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     const pos = new Vector(random(0, width), random(0, height));
-    const a = new Atom(pos, 10, -2, i);
-    const b = new Atom(Vector.add(pos, new Vector(8, 6)), 10, 1, i);
-    const c = new Atom(Vector.add(pos, new Vector(-8, 6)), 10, 1, i);
+    const a = new Atom(pos, 10, -2, i + 1, '#f00');
+    const b = new Atom(Vector.add(pos, new Vector(8, 6)), 4, 1, i + 1, '#fff');
+    const c = new Atom(Vector.add(pos, new Vector(-8, 6)), 4, 1, i + 1, '#fff');
 
     const ab = Constraint.create({
       bodyA: a.body,
       bodyB: b.body,
-      length: 16,
+      length: 10,
     });
     const ac = Constraint.create({
       bodyA: a.body,
       bodyB: c.body,
-      length: 16,
+      length: 10,
     });
     const bc = Constraint.create({
       bodyA: b.body,
       bodyB: c.body,
-      length: 25,
+      length: 15,
     });
 
-    atoms.push(...[a, b, c]);
+    atoms.push(...[b, c, a]);
     Composite.add(world, [a.body, b.body, c.body]);
-    //Composite.add(world, [ab, ac, bc]);
+    Composite.add(world, [ab, ac, bc]);
+  }
+
+  for (let i = 0; i < 10; i++) {
+    const pos = new Vector(width / 2 + i * 20, height / 2);
+    const a = new Atom(pos, 10, 1, i + 1, '#f0f');
+
+    atoms.push(a);
+    Composite.add(world, a.body);
+  }
+
+  for (let i = 0; i < 10; i++) {
+    const pos = new Vector(width / 2 + i * 20, height / 2 + 20);
+    const a = new Atom(pos, 10, -1, i + 1, '#0ff');
+
+    atoms.push(a);
+    Composite.add(world, a.body);
   }
 };
 
