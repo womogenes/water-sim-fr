@@ -4,10 +4,9 @@ class Atom {
       options: {
         density: 1,
         restitution: 0.8,
-        slop: 1,
+        friction: 0.5,
         collisionFilter: {
-          group: 0,
-          category: 0,
+          group: -id,
         },
       },
     });

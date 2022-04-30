@@ -28,28 +28,17 @@ window.setup = () => {
   for (let i = 0; i < 50; i++) {
     const pos = new Vector(random(0, width), random(0, height));
     const a = new Atom(pos, 10, -2, i);
-    const b = new Atom(Vector.add(pos, new Vector(8, 6)), 10, 1, i);
-    const c = new Atom(Vector.add(pos, new Vector(-8, 6)), 10, 1, i);
 
-    const ab = Constraint.create({
-      bodyA: a.body,
-      bodyB: b.body,
-      length: 16,
-    });
-    const ac = Constraint.create({
-      bodyA: a.body,
-      bodyB: c.body,
-      length: 16,
-    });
-    const bc = Constraint.create({
-      bodyA: b.body,
-      bodyB: c.body,
-      length: 25,
-    });
+    atoms.push(a);
+    Composite.add(world, a.body);
+  }
 
-    atoms.push(...[a, b, c]);
-    Composite.add(world, [a.body, b.body, c.body]);
-    //Composite.add(world, [ab, ac, bc]);
+  for (let i = 0; i < 70; i++) {
+    const pos = new Vector(random(0, width), random(0, height));
+    const a = new Atom(pos, 5, 1, i);
+
+    atoms.push(a);
+    Composite.add(world, a.body);
   }
 };
 
